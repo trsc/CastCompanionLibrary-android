@@ -19,6 +19,7 @@ package com.google.android.libraries.cast.companionlibrary.cast.player;
 import static com.google.android.libraries.cast.companionlibrary.utils.LogUtils.LOGD;
 import static com.google.android.libraries.cast.companionlibrary.utils.LogUtils.LOGE;
 
+import com.google.android.gms.cast.CastStatusCodes;
 import com.google.android.gms.cast.MediaInfo;
 import com.google.android.gms.cast.MediaMetadata;
 import com.google.android.gms.cast.MediaQueueItem;
@@ -239,6 +240,15 @@ public class VideoCastControllerFragment extends Fragment implements
                 updateMetadata();
             } catch (TransientNetworkDisconnectionException | NoConnectionException e) {
                 LOGE(TAG, "Failed to update the metadata due to network issues", e);
+            }
+        }
+
+        @Override
+        public void onMediaLoadResult(int statusCode) {
+            if (CastStatusCodes.SUCCESS != statusCode) {
+                LOGD(TAG, "onMediaLoadResult(): " + CastStatusCodes.getStatusCodeString(statusCode));
+                Utils.showToast(getActivity(), R.string.ccl_failed_to_load_media);
+                mCastController.closeActivity();
             }
         }
 

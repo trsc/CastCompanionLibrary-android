@@ -53,6 +53,7 @@
 
     <!-- Failures -->
     <string name="ccl_failed_to_connect">Could not connect to the device</string>
+    <string name="ccl_failed_to_load_media">Cast device failed to load media</string>
     <string name="ccl_failed_setting_volume">Failed to set the volume</string>
     <string name="ccl_failed_no_connection">No connection to the cast device is present</string>
     <string name="ccl_failed_no_connection_short">No connection</string>
